@@ -24,33 +24,35 @@
 
     </div>
 
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th
-            v-for="title in daysTitle"
-            v-bind:key="title"
-            :style="{'width':cellWidth}"
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th
+              v-for="title in daysTitle"
+              v-bind:key="title"
+              :style="{'width':cellWidth}"
+            >
+              {{ title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(week, $weekIndex) in days"
+            v-bind:key="'week-'+$weekIndex"
           >
-            {{ title }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(week, $weekIndex) in days"
-          v-bind:key="'week-'+$weekIndex"
-        >
-          <calendar-day
-            v-for="(day, $dayIndex) in week"
-            v-bind:key="`day-${$dayIndex}-${$dayIndex}`"
-            :day="day"
-            @pollCompleted="onPollCompleted($event,$weekIndex, $dayIndex)"
-          >
-          </calendar-day>
-        </tr>
-      </tbody>
-    </table>
+            <calendar-day
+              v-for="(day, $dayIndex) in week"
+              v-bind:key="`day-${$dayIndex}-${$dayIndex}`"
+              :day="day"
+              @pollCompleted="onPollCompleted($event,$weekIndex, $dayIndex)"
+            >
+            </calendar-day>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
